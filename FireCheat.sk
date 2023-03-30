@@ -1,0 +1,75 @@
+#reach
+on damage:
+    if attacker is player and victim is player:
+        set {_reach} to distance between eye location of attacker and victim
+        if {_reach} > 3.25:
+            loop all players:
+                if loop-player has permission "ac.view"
+                    send "&c%attacker% &7tried to hit &c%victim% &7from &c%{_reach}% &7blocks away!" to loop-player
+#fly
+on move:
+    if player is moving:
+        set {_distance} to distance between previous location of player and location of player
+        set {_maxDistance} to 2.5 # The maximum distance a player can move in a single tick
+        if {_distance} > {_maxDistance}:
+        loop all players:
+            if loop-player has permission "ac.view"
+                send "&c%player% &7tried to fly!" to loop-player
+#speed
+on move:
+    if player is moving:
+        set {_distance} to distance between previous location of player and location of player
+        set {_maxSpeed} to 0.25 # The maximum speed allowed on most servers is 0.15 blocks per tick
+        if {_distance} > {_maxSpeed}:
+        loop all players:
+            if loop-player has permission "ac.view"
+                send "&c%player% &7tried to speed!" to loop-player
+#kill aura
+on damage:
+    if attacker is player and victim is player:
+        set {_reach} to distance between eye location of attacker and victim
+        set {_maxTargets} to 5 # The maximum number of targets a player can hit in a single tick
+        set {_targetCount} to 0
+        loop all players:
+            if loop-player is not victim and loop-player is not attacker:
+                set {_targetReach} to distance between eye location of attacker and loop-player
+                if {_targetReach} < 3.3:
+                    set {_ray} to ray from eye location of attacker to eye location of loop-player
+                    set {_block} to first block in {_ray}
+                    if {_block} is not air:
+                        continue # Player is hitting through a wall
+                    set {_angle} to angle between vector from attacker to loop-player and yaw of attacker
+                    if abs({_angle}) < 60:
+                        continue # Player is hitting someone in front of them
+                    set {_targetCount} to {_targetCount} + 1
+        if {_reach} < 3.3 and {_targetCount} > {_maxTargets}
+        loop all players:
+            if loop-player has permission "ac.view"
+                send "&c%player% &7tried to hit someone with an unexpected angle!" to loop-player
+#fast break
+on break:
+    if player is not sneaking:
+        set {_distance} to distance between previous location of player and location of player
+        set {_maxSpeed} to 0.45 # The maximum speed allowed on most servers is 0.15 blocks per tick
+        if {_distance} > {_maxSpeed}:
+        loop all players:
+            if loop-player has permission "ac.view"
+                send "&c%player% &7tried to fast break!" to loop-player
+#hitboxes
+on damage:
+    if attacker is player and victim is player:
+        set {_reach} to distance between eye location of attacker and victim
+        set {_maxTargets} to 5 # The maximum number of targets a player can hit in a single tick
+        set {_targetCount} to 0
+        loop all players:
+            if loop-player is not victim and loop-player is not attacker:
+                set {_targetReach} to distance between eye location of attacker and loop-player
+                if {_targetReach} < 3.5:
+                    set {_angle} to angle between vector from attacker to loop-player and yaw of attacker
+                    if abs({_angle}) > 75:
+                        continue # Player is hitting someone from an unexpected angle
+                    set {_targetCount} to {_targetCount} + 1
+        if {_reach} < 3.5 and {_targetCount} > {_maxTargets}
+        loop all players:
+            if loop-player has permission "ac.view"
+                send "&c%player% &7tried to hit someone with an unexpected angle!" to loop-player
