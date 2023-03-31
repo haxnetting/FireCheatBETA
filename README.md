@@ -1,6 +1,6 @@
 # FireCheat BETA
 
-![FireCheat Logo]- for now
+![FireCheat Logo](https://cdn.discordapp.com/attachments/1077880279567433729/1091237151062097960/Black_Minimalist_Fire_Gaming_logo.jpg)
 
 FireCheat BETA is a Minecraft Skript anticheat system designed to detect and prevent various cheats, such as KillAura, Speed, Fly, and Hitbox hacks.
 
