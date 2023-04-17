@@ -37,6 +37,10 @@ FireCheat BETA can send alerts to server administrators when a cheat is detected
 
 If you have any questions, issues, or suggestions, feel free to open an issue on the [GitHub repository](https://github.com/HAX-MC/FireCheat/issues).
 
+## Requirements
+
+SkRayfall and SKQuery
+
 ## License
 
 FireCheat BETA is released under the MIT License. See `LICENSE` for details.
